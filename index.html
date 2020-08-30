@@ -3,6 +3,17 @@
     <link type="text/css" href="style.css" rel="stylesheet"></link>
 </head>
 <body>
+    <div id="promptWrapper">
+        <div id="promptBox">
+            <h1>Welcome to Tic-Tac-Toe!</h1>
+            <h2>by <a href="https://cordellbonnieux.com" target="_blank">Cordell Bonnieux</a></h2>
+            <h3>Please choose how you'd like to play:</h3>
+            <div id="promptChoiceWrapper">
+                <div class="left"><button id="computer">1 Player</button></div>
+                <div class="right"><button id="local">2 Player</button></div>
+            </div>
+        </div>
+    </div>
     <div id="gameBoard">
         <div><button id="topLeft"></button></div>
         <div><button id="topCenter"></button></div>
@@ -15,6 +26,18 @@
         <div><button id="bottomLeft"></button></div>
         <div><button id="bottomCenter"></button></div>
         <div><button id="bottomRight"></button></div>
+    </div>
+    <div id="playerConsole">
+        <div class="left">
+            <div id="scoreKeeperOne">Player One: <span id="scoreOne">0</span></div>
+            <div id="scoreKeeperTwo">Player Two: <span id="scoreTwo">0</span></div>
+        </div>
+        <div class="right">
+            <button id="resetBoard">Reset The Board</button>
+            <button id="resetGame">Reset The Game</button>
+            <button id="playComputer">Switch to 1 Player</button>
+            <button id="playLocal">Switch to 2 Player</button>
+        </div>
     </div>
     <script src="script-alt.js"></script>
 </body>
