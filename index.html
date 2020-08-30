@@ -12,25 +12,32 @@
                 <div class="left"><button id="computer">1 Player</button></div>
                 <div class="right"><button id="local">2 Player</button></div>
             </div>
+            <p>Classic Tic-Tac-Toe first to 3 wins the match. Play locally with a friend, or by yourself against the computer.</p>
         </div>
     </div>
-    <div id="gameBoard">
-        <div><button id="topLeft"></button></div>
-        <div><button id="topCenter"></button></div>
-        <div><button id="topRight"></button></div>
+    <div id="gameBoardWrapper">
+        <h1>Tic-Tac-Toe</h1>
+        <div id="gameBoard">
+            <div><button id="topLeft"></button></div>
+            <div><button id="topCenter"></button></div>
+            <div><button id="topRight"></button></div>
 
-        <div><button id="middleLeft"></button></div>
-        <div><button id="middleCenter"></button></div>
-        <div><button id="middleRight"></button></div>
+            <div><button id="middleLeft"></button></div>
+            <div><button id="middleCenter"></button></div>
+            <div><button id="middleRight"></button></div>
 
-        <div><button id="bottomLeft"></button></div>
-        <div><button id="bottomCenter"></button></div>
-        <div><button id="bottomRight"></button></div>
+            <div><button id="bottomLeft"></button></div>
+            <div><button id="bottomCenter"></button></div>
+            <div><button id="bottomRight"></button></div>
+        </div>
     </div>
     <div id="playerConsole">
         <div class="left">
-            <div id="scoreKeeperOne">Player One: <span id="scoreOne">0</span></div>
-            <div id="scoreKeeperTwo">Player Two: <span id="scoreTwo">0</span></div>
+            <div id="keeperWrapper">
+                <div id="scoreKeeperOne">Player One: <span id="scoreOne">0</span></div>
+                <div id="scoreKeeperTwo">Player Two: <span id="scoreTwo">0</span></div>
+            </div>
+            <div id="notificationArea">Player One's Turn</div>
         </div>
         <div class="right">
             <button id="resetBoard">Reset The Board</button>

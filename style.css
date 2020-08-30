@@ -1,11 +1,11 @@
 body{
-    background-color:grey;
+    background-color:#484848;
 }
 #promptWrapper{
     display:block;
     position:absolute;
     z-index:99;
-    background-color:red;
+    background-color:#484848;
     width:99%;
     height:99%;
     margin:0;
@@ -16,14 +16,38 @@ body{
     #promptBox{
         display:block;
         margin:100px auto;
+        background-color:#245b1f;
+        border:1px solid #dcdcdc;
+        margin:20px auto;
+        padding:40px;
+        color:#78ff9a;
+        width:600px;
+    }
+        #promptBox button, #playerConsole button{
+            padding:8px;
+            background-color:#dcdcdc;
+            border:1px solid;
+            color:#484848;
+            box-shadow:-1px 2px #958b8b;
+            margin:4px;
+        }
+#gameBoardWrapper{
+    padding:0 0 20px 0;
+    display:block;
+    margin:0 auto;
+    width:610px;
+}
+    #gameBoardWrapper h1{
+        text-align:center;
+        color:#353a34;
     }
 #gameBoard{
+    border:4px solid #dcdcdc;
     display:grid;
     grid-template-columns:auto auto auto;
     width:600px;
     height:600px;
-    padding:100px 0 20px 0;
-    margin:auto;
+    background-color:#245b1f;
 }
     #gameBoard div{
         width:200px;
@@ -33,7 +57,16 @@ body{
             width:100%;
             height:100%;
             font-size:100px;
+            background-color:transparent;
+            border:1px solid #78ff9a;
+            transition:0.2s;
+            box-shadow:none;
         }
+            #gameBoard div button:hover{
+                opacity:0.5;
+                background-color:#78ff9a;
+            }
+        
 .left{
     display:inline-block;
     max-width:50%;
@@ -43,17 +76,34 @@ body{
     max-width:50%;
 }
 #playerConsole{
-    margin:0 auto;
+    margin:0 auto 10px auto;
     display:block;
-    max-width:600px;
+    width:600px;
 }
     #playerConsole .right{
         float:right; /* idk */
     }
+    #keeperWrapper{
+        display:inline-block;
+    }
         #scoreKeeperOne, #scoreKeeperTwo{
-            background-color:green;
-            border:1px solid #000;
+            background-color:#245b1f;
+            border:1px solid #dcdcdc;
             margin:2px;
             padding:4px;
-            color:
+            color:#78ff9a;
         }
+    #notificationArea{
+        float:right;
+        display:inline-block;
+        background-color:#245b1f;
+        border:1px solid #dcdcdc;
+        margin:2px;
+        padding:4px;
+        color:#78ff9a;
+        height:100%;
+        height:50px;
+        width:150px;
+        font-size: 20px;
+        text-align: center;
+    }
