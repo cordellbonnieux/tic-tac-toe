@@ -1,6 +1,13 @@
 body{
     background-color:#484848;
+    font-family: 'VT323', monospace;
 }
+button{
+    font-family: 'VT323', monospace;
+}
+    button:hover{
+        cursor:pointer;
+    }
 #promptWrapper{
     display:block;
     position:absolute;
@@ -16,19 +23,27 @@ body{
     #promptBox{
         display:block;
         margin:100px auto;
-        background-color:#245b1f;
-        border:1px solid #dcdcdc;
-        margin:20px auto;
+        margin:0 auto;
         padding:40px;
-        color:#78ff9a;
         width:600px;
     }
+        #promptScreen{
+            color:#78ff9a;
+            background-color:#245b1f;
+            border:1px solid #dcdcdc;
+            width:400px;
+            margin:20px auto;
+            padding:8px;
+        }
+            #promptScreen a, #promptScreen a:hover, #promptScreen a:focus, #promptScreen a:active{
+                color:#78ff9a;
+            }
         #promptBox button, #playerConsole button{
             padding:8px;
             background-color:#dcdcdc;
             border:1px solid;
             color:#484848;
-            box-shadow:-1px 2px #958b8b;
+            box-shadow:-2px 2px #958b8b;
             margin:4px;
         }
 #gameBoardWrapper{
@@ -37,10 +52,19 @@ body{
     margin:0 auto;
     width:610px;
 }
-    #gameBoardWrapper h1{
+    #headingScreen{
         text-align:center;
-        color:#353a34;
+        background-color:#245b1f;
+        border:1px solid #dcdcdc;
+        color:#78ff9a;
+        width:300px;
+        height:40px;
+        display:block;
+        margin:20px auto;
     }
+        #headingScreen h1{
+            margin:0;
+        }
 #gameBoard{
     border:4px solid #dcdcdc;
     display:grid;

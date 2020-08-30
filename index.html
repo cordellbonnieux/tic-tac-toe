@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet"> 
     <link type="text/css" href="style.css" rel="stylesheet"></link>
 </head>
 <body>
     <div id="promptWrapper">
         <div id="promptBox">
-            <h1>Welcome to Tic-Tac-Toe!</h1>
-            <h2>by <a href="https://cordellbonnieux.com" target="_blank">Cordell Bonnieux</a></h2>
-            <h3>Please choose how you'd like to play:</h3>
+            <div id="promptScreen">
+                <h1>Welcome to Tic-Tac-Toe!</h1>
+                <h2>by <a href="https://cordellbonnieux.com" target="_blank">Cordell Bonnieux</a></h2>
+                <p>Classic Tic-Tac-Toe, first to win 3 rounds wins the match. Play locally with a friend, or by yourself against the computer.</p>
+                <h3>Please choose how you'd like to play:</h3>
+            </div>
             <div id="promptChoiceWrapper">
                 <div class="left"><button id="computer">1 Player</button></div>
                 <div class="right"><button id="local">2 Player</button></div>
             </div>
-            <p>Classic Tic-Tac-Toe first to 3 wins the match. Play locally with a friend, or by yourself against the computer.</p>
         </div>
     </div>
     <div id="gameBoardWrapper">
-        <h1>Tic-Tac-Toe</h1>
+        <div id="headingScreen"><h1>Tic-Tac-Toe</h1></div>
         <div id="gameBoard">
             <div><button id="topLeft"></button></div>
             <div><button id="topCenter"></button></div>
