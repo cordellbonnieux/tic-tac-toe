@@ -21,7 +21,7 @@ function createPlayer(name, turn){
     }
 };
 // Create players --> next step is to add AI!
-const player1 = createPlayer("player one", true);
+const player1 = createPlayer("cordell", true);
 const player2 = createPlayer('player two', false); // use for local & AI?
 // create the turn counter using the createPlayer
 const turnCounter = createPlayer("turn counter", false);
@@ -152,14 +152,31 @@ bottomCenter.addEventListener('click', function(){return buttonClick(bottomCente
 bottomRight.addEventListener('click', function(){return buttonClick(bottomRight)});
 // Creates the prompt to ask if you will player locally or vs. AI
 const promptWrapper = document.getElementById('promptWrapper');
+// One Player / VS Computer
 const onePlayer = document.getElementById('computer');
 onePlayer.addEventListener('click', function(){
     // When I build the AI, this is where I would activate it!
 });
+// Two players / local play
 const twoPlayer = document.getElementById('local');
+const nameInputForm = document.getElementById('nameInputForm');
 twoPlayer.addEventListener('click', function(){
-    promptWrapper.style.cssText = "display:none;";
+    twoPlayer.style.display = "none";
+    onePlayer.style.display = "none";
+    nameInputForm.style.display = "block"
+
 });
+// Allows plays to enter their names
+const player1Name = document.getElementById('scoreKeeperOneName');
+const player2Name = document.getElementById('scoreKeeperTwoName');
+const submitNames = document.getElementById('submit');
+submitNames.addEventListener('click', function(){
+    player1.name = player1Name.value;
+    player2.name = player2Name.value;
+    scoreKeeperOne.innerHTML = player1.name;
+    scoreKeeperTwo.innerHTML = player2.name;
+    promptWrapper.style.display = "none";
+})
 // Score Keeper
 const scoreOne = document.getElementById('scoreOne');
 const scoreTwo = document.getElementById('scoreTwo');
@@ -167,11 +184,12 @@ const scoreTwo = document.getElementById('scoreTwo');
 const notificationArea = document.getElementById('notificationArea');
 function notifications(){
     if (player1.turn == true){
-        notificationArea.innerHTML= "Player One's Turn";
+        notificationArea.innerHTML= `${player1.name}'s Turn`;
     } else if (player2.turn == true){
-        notificationArea.innerHTML = "Player Two's Turn"
+        notificationArea.innerHTML = `${player2.name}'s Turn`;
     }
-}
+};
+notifications();
 // Reset the board (and button)
 const resetBoardButton = document.getElementById('resetBoard');
 resetBoardButton.addEventListener('click', function(){return resetBoard()}); 
@@ -214,6 +232,7 @@ function tieReset(){
             return
         }
 };
+
 
 
 

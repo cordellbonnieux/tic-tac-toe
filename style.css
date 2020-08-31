@@ -2,10 +2,11 @@ body{
     background-color:#484848;
     font-family: 'VT323', monospace;
 }
-button{
+button,input,#submit{
     font-family: 'VT323', monospace;
+    font-size:18px;
 }
-    button:hover{
+    button:hover, #submit:hover{
         cursor:pointer;
     }
 #promptWrapper{
@@ -27,24 +28,38 @@ button{
         padding:40px;
         width:600px;
     }
+        #promptChoiceWrapper{
+            margin-top:10px;
+        }
         #promptScreen{
             color:#78ff9a;
             background-color:#245b1f;
             border:1px solid #dcdcdc;
             width:400px;
-            margin:20px auto;
+            margin:0 auto;
             padding:8px;
         }
             #promptScreen a, #promptScreen a:hover, #promptScreen a:focus, #promptScreen a:active{
                 color:#78ff9a;
             }
-        #promptBox button, #playerConsole button{
+        #promptBox button, #submit, #playerConsole button{
             padding:8px;
             background-color:#dcdcdc;
             border:1px solid;
             color:#484848;
             box-shadow:-2px 2px #958b8b;
             margin:4px;
+        }
+        #scoreKeeperOneName,#scoreKeeperTwoName{
+            display:inline-block;
+            width:115px;
+        }
+        /* keep hidden until called */
+        #nameInputForm{
+            display:none;
+        }
+        #computer, #local{
+
         }
 #gameBoardWrapper{
     padding:0 0 20px 0;
@@ -87,7 +102,6 @@ button{
             box-shadow:none;
         }
             #gameBoard div button:hover{
-                opacity:0.5;
                 background-color:#78ff9a;
             }
         
@@ -109,13 +123,22 @@ button{
     }
     #keeperWrapper{
         display:inline-block;
+        length:100px;
     }
-        #scoreKeeperOne, #scoreKeeperTwo{
+        #scoreKeeperOneName,#scoreKeeperTwoName, .greenWrapper{
             background-color:#245b1f;
             border:1px solid #dcdcdc;
             margin:2px;
             padding:4px;
             color:#78ff9a;
+        }
+        #scoreKeeperOne, #scoreKeeperTwo{
+            display:inline;
+        }
+        #scoreOne, #scoreTwo{
+            font-size:20px;
+            display:inline-block;
+            margin-right:8px;
         }
     #notificationArea{
         float:right;
