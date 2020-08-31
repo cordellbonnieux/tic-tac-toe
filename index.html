@@ -6,11 +6,14 @@
 <body>
     <div id="promptWrapper">
         <div id="promptBox">
-            <div id="promptScreen">
+            <div class="promptScreen" id="promptScreenWelcome">
                 <h1>Welcome to Tic-Tac-Toe!</h1>
                 <h2>by <a href="https://cordellbonnieux.com" target="_blank">Cordell Bonnieux</a></h2>
                 <p>Classic Tic-Tac-Toe, first to win 3 rounds wins the match. Play locally with a friend, or by yourself against the computer.</p>
                 <h3>Please choose how you'd like to play:</h3>
+            </div>
+            <div id="playAgain" class="promptScreen">
+                <h1>Play again?</h1>
             </div>
             <div id="promptChoiceWrapper">
                 <div class="left"><button id="computer">1 Player</button></div>
@@ -50,8 +53,7 @@
         <div class="right">
             <button id="resetBoard">Reset The Board</button>
             <button id="resetGame">Reset The Game</button>
-            <button id="playComputer">Switch to 1 Player</button>
-            <button id="playLocal">Switch to 2 Player</button>
+            <button id="togglePlay">Switch to 1 Player</button>
         </div>
     </div>
     <script src="script-alt.js"></script>
