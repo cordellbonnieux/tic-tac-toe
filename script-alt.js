@@ -33,7 +33,8 @@ function winnerTest(player){
         player.position.bottomRight == true && player.position.bottomCenter && player.position.bottomLeft ||
         player.position.bottomLeft == true && player.position.middleCenter && player.position.topRight ||
         player.position.middleLeft == true && player.position.middleCenter && player.position.middleRight ||
-        player.position.topCenter == true && player.position.middleCenter && player.position.bottomCenter){
+        player.position.topCenter == true && player.position.middleCenter && player.position.bottomCenter ||
+        player.position.bottomRight == true && player.position.middleRight && player.position.topRight){
             player.score++;
             if (player.score >= 3){
                 alert(`${player.name} wins the game!`);
