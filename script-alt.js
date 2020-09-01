@@ -49,7 +49,9 @@ function winnerTest(player){
                 return assignBoard(), resetGame();
             } else if (player.score < 3){
                 alert(`${player.name} wins the round!`);
-                resetBoard();
+                return resetBoard();
+            } else{
+                return;
             }
         }
 };
@@ -96,84 +98,6 @@ function buttonClick(pos){
         scoreOne.innerHTML = player1.score;
         notifications();
         console.log("player1 just fired");
-        if (player2.computer == true && player2.turn == true && player1.turn == false){
-            // AI logic
-            let compChoice = [1,2,3,4,5,6,7,8,9];
-            function chooseRandom(){
-                function randomChoice(arr) {
-                    return arr[Math.floor(arr.length * Math.random())];
-                };
-                let choice = randomChoice(compChoice);
-                if (choice == 1 && turnCounter.position.topLeft == false){
-                    topLeft.innerHTML = "o";
-                    topLeft.style.color = "#78ff9a";
-                    player2.position.topLeft = true;
-                    turnCounter.position.topLeft = true;
-                    return;
-                } else if (choice == 2 && turnCounter.position.topCenter == false){
-                    topCenter.innerHTML = "o";
-                    topCenter.style.color = "#78ff9a";
-                    player2.position.topCenter = true;
-                    turnCounter.position.topCenter = true;
-                    return;
-                } else if (choice == 3 && turnCounter.position.topRight == false){
-                    topRight.innerHTML = "o";
-                    topRight.style.color = "#78ff9a";
-                    player2.position.topRight = true;
-                    turnCounter.position.topRight = true;
-                    return;
-                } else if (choice == 4 && turnCounter.position.middleLeft == false){
-                    middleLeft.innerHTML = "o";
-                    middleLeft.style.color = "#78ff9a";
-                    player2.position.middleLeft = true;
-                    turnCounter.position.middleLeft = true;
-                    return;
-                } else if (choice == 5 && turnCounter.position.middleCenter == false){
-                    middleCenter.innerHTML = "o";
-                    middleCenter.style.color = "#78ff9a";
-                    player2.position.middleCenter = true;
-                    turnCounter.position.middleCenter = true;
-                    return;  
-                } else if (choice == 6 && turnCounter.position.middleRight == false){
-                    middleRight.innerHTML = "o";
-                    middleRight.style.color = "#78ff9a";
-                    player2.position.middleRight = true;
-                    turnCounter.position.middleRight = true;
-                    return; 
-                } else if (choice == 7 && turnCounter.position.bottomLeft == false){
-                    bottomLeft.innerHTML = "o";
-                    bottomLeft.style.color = "#78ff9a";
-                    player2.position.bottomLeft = true;
-                    turnCounter.position.bottomLeft = true;
-                    return; 
-                } else if (choice == 8 && turnCounter.position.bottomCenter == false){
-                    bottomCenter.innerHTML = "o";
-                    bottomCenter.style.color = "#78ff9a";
-                    player2.position.bottomCenter = true;
-                    turnCounter.position.bottomCenter = true;
-                    return;  
-                } else if (choice == 9 && turnCounter.position.bottomRight == false){
-                    bottomRight.innerHTML = "o";
-                    bottomRight.style.color = "#78ff9a";
-                    player2.position.bottomRight = true;
-                    turnCounter.position.bottomRight = true;
-                    return;  
-                } else {
-                    return chooseRandom();
-                }
-            }
-            chooseRandom();
-            player2.turn = false;
-            player1.turn = true;
-            winnerTest(player2);
-            tieReset()
-            scoreTwo.innerHTML = player2.score;
-            notifications();
-            console.log("AI player just fired");
-            return;
-        } else {
-            return;
-        }
     } else if (player2.turn == true && player2.computer == false){ 
         if (tile == topLeft && player1.position.topLeft == false && player2.position.topLeft == false){
             player2.position.topLeft = true;
@@ -202,7 +126,7 @@ function buttonClick(pos){
         } else if (tile == bottomRight && player1.position.bottomRight == false && player2.position.bottomRight == false){
             player2.position.bottomRight = true;
             turnCounter.position.bottomRight = true;
-        } else { 
+        } else {
             return;
         }
         tile.innerHTML = "o";
@@ -217,6 +141,82 @@ function buttonClick(pos){
     } else {
         return;
     }
+}
+// AI logic
+function aiLogic(){
+    function chooseRandom(){
+        function randomChoice(arr) {
+            return arr[Math.floor(arr.length * Math.random())];
+        };
+        let compChoice = [1,2,3,4,5,6,7,8,9];
+        let choice = randomChoice(compChoice);
+        if (choice == 1 && turnCounter.position.topLeft == false){
+            topLeft.innerHTML = "o";
+            topLeft.style.color = "#78ff9a";
+            player2.position.topLeft = true;
+            turnCounter.position.topLeft = true;
+            return;
+        } else if (choice == 2 && turnCounter.position.topCenter == false){
+            topCenter.innerHTML = "o";
+            topCenter.style.color = "#78ff9a";
+            player2.position.topCenter = true;
+            turnCounter.position.topCenter = true;
+            return;
+        } else if (choice == 3 && turnCounter.position.topRight == false){
+            topRight.innerHTML = "o";
+            topRight.style.color = "#78ff9a";
+            player2.position.topRight = true;
+            turnCounter.position.topRight = true;
+            return;
+        } else if (choice == 4 && turnCounter.position.middleLeft == false){
+            middleLeft.innerHTML = "o";
+            middleLeft.style.color = "#78ff9a";
+            player2.position.middleLeft = true;
+            turnCounter.position.middleLeft = true;
+            return;
+        } else if (choice == 5 && turnCounter.position.middleCenter == false){
+            middleCenter.innerHTML = "o";
+            middleCenter.style.color = "#78ff9a";
+            player2.position.middleCenter = true;
+            turnCounter.position.middleCenter = true;
+            return;  
+        } else if (choice == 6 && turnCounter.position.middleRight == false){
+            middleRight.innerHTML = "o";
+            middleRight.style.color = "#78ff9a";
+            player2.position.middleRight = true;
+            turnCounter.position.middleRight = true;
+            return; 
+        } else if (choice == 7 && turnCounter.position.bottomLeft == false){
+            bottomLeft.innerHTML = "o";
+            bottomLeft.style.color = "#78ff9a";
+            player2.position.bottomLeft = true;
+            turnCounter.position.bottomLeft = true;
+            return; 
+        } else if (choice == 8 && turnCounter.position.bottomCenter == false){
+            bottomCenter.innerHTML = "o";
+            bottomCenter.style.color = "#78ff9a";
+            player2.position.bottomCenter = true;
+            turnCounter.position.bottomCenter = true;
+            return;  
+        } else if (choice == 9 && turnCounter.position.bottomRight == false){
+            bottomRight.innerHTML = "o";
+            bottomRight.style.color = "#78ff9a";
+            player2.position.bottomRight = true;
+            turnCounter.position.bottomRight = true;
+            return;  
+        } else {
+            return chooseRandom();
+        }
+    };
+    chooseRandom();
+    winnerTest(player2);
+    tieReset()
+    scoreTwo.innerHTML = player2.score;
+    notifications();
+    player2.turn = false;
+    player1.turn = true;
+    console.log("AI player just fired");
+    return;
 }
 function assignBoard(){
     // assign positions to variables 
