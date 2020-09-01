@@ -6,6 +6,7 @@ function createPlayer(name, turn){
     return {
         name,
         turn,
+        computer: false,
         score:0,
         position:{
             topLeft: false,
@@ -22,7 +23,7 @@ function createPlayer(name, turn){
 };
 // Create players --> next step is to add AI!
 const player1 = createPlayer("player1", true);
-const player2 = createPlayer('player2', false); // use for local & AI?
+const player2 = createPlayer('player2', false); // use for local & AI
 // create the turn counter using the createPlayer
 const turnCounter = createPlayer("turn counter", false);
 // test each time a position is chosen to check for winner
@@ -94,7 +95,86 @@ function buttonClick(pos){
         tieReset()
         scoreOne.innerHTML = player1.score;
         notifications();
-    } else if (player2.turn == true){ 
+        console.log("player1 just fired");
+        if (player2.computer == true && player2.turn == true && player1.turn == false){
+            // AI logic
+            let compChoice = [1,2,3,4,5,6,7,8,9];
+            function chooseRandom(){
+                function randomChoice(arr) {
+                    return arr[Math.floor(arr.length * Math.random())];
+                };
+                let choice = randomChoice(compChoice);
+                if (choice == 1 && turnCounter.position.topLeft == false){
+                    topLeft.innerHTML = "o";
+                    topLeft.style.color = "#78ff9a";
+                    player2.position.topLeft = true;
+                    turnCounter.position.topLeft = true;
+                    return;
+                } else if (choice == 2 && turnCounter.position.topCenter == false){
+                    topCenter.innerHTML = "o";
+                    topCenter.style.color = "#78ff9a";
+                    player2.position.topCenter = true;
+                    turnCounter.position.topCenter = true;
+                    return;
+                } else if (choice == 3 && turnCounter.position.topRight == false){
+                    topRight.innerHTML = "o";
+                    topRight.style.color = "#78ff9a";
+                    player2.position.topRight = true;
+                    turnCounter.position.topRight = true;
+                    return;
+                } else if (choice == 4 && turnCounter.position.middleLeft == false){
+                    middleLeft.innerHTML = "o";
+                    middleLeft.style.color = "#78ff9a";
+                    player2.position.middleLeft = true;
+                    turnCounter.position.middleLeft = true;
+                    return;
+                } else if (choice == 5 && turnCounter.position.middleCenter == false){
+                    middleCenter.innerHTML = "o";
+                    middleCenter.style.color = "#78ff9a";
+                    player2.position.middleCenter = true;
+                    turnCounter.position.middleCenter = true;
+                    return;  
+                } else if (choice == 6 && turnCounter.position.middleRight == false){
+                    middleRight.innerHTML = "o";
+                    middleRight.style.color = "#78ff9a";
+                    player2.position.middleRight = true;
+                    turnCounter.position.middleRight = true;
+                    return; 
+                } else if (choice == 7 && turnCounter.position.bottomLeft == false){
+                    bottomLeft.innerHTML = "o";
+                    bottomLeft.style.color = "#78ff9a";
+                    player2.position.bottomLeft = true;
+                    turnCounter.position.bottomLeft = true;
+                    return; 
+                } else if (choice == 8 && turnCounter.position.bottomCenter == false){
+                    bottomCenter.innerHTML = "o";
+                    bottomCenter.style.color = "#78ff9a";
+                    player2.position.bottomCenter = true;
+                    turnCounter.position.bottomCenter = true;
+                    return;  
+                } else if (choice == 9 && turnCounter.position.bottomRight == false){
+                    bottomRight.innerHTML = "o";
+                    bottomRight.style.color = "#78ff9a";
+                    player2.position.bottomRight = true;
+                    turnCounter.position.bottomRight = true;
+                    return;  
+                } else {
+                    return chooseRandom();
+                }
+            }
+            chooseRandom();
+            player2.turn = false;
+            player1.turn = true;
+            winnerTest(player2);
+            tieReset()
+            scoreTwo.innerHTML = player2.score;
+            notifications();
+            console.log("AI player just fired");
+            return;
+        } else {
+            return;
+        }
+    } else if (player2.turn == true && player2.computer == false){ 
         if (tile == topLeft && player1.position.topLeft == false && player2.position.topLeft == false){
             player2.position.topLeft = true;
             turnCounter.position.topLeft = true;
@@ -133,10 +213,10 @@ function buttonClick(pos){
         tieReset()
         scoreTwo.innerHTML = player2.score;
         notifications();
+        console.log("player2 just fired");
     } else {
         return;
     }
-    return
 }
 function assignBoard(){
     // assign positions to variables 
@@ -167,15 +247,24 @@ const promptWrapper = document.getElementById('promptWrapper');
 const onePlayer = document.getElementById('computer');
 onePlayer.addEventListener('click', function(){
     // When I build the AI, this is where I would activate it!
+    twoPlayer.style.display = "none";
+    onePlayer.style.display = "none";
+    nameInputForm.style.display = "block"
+    scoreKeeperTwoName.style.display = "none" // here
+    player2.computer = true;
+    player2Name.value = "Computer";
+    togglePlay.innerHTML = "Switch to 2 Player";
+    notifications();
 });
 // Two players / local play
 const twoPlayer = document.getElementById('local');
 const nameInputForm = document.getElementById('nameInputForm');
 twoPlayer.addEventListener('click', function(){
+    player2.computer = false;
     twoPlayer.style.display = "none";
     onePlayer.style.display = "none";
     nameInputForm.style.display = "block"
-
+    togglePlay.innerHTML = "Switch to 1 Player";
 });
 // Allows plays to enter their names
 const player1Name = document.getElementById('scoreKeeperOneName');
@@ -186,6 +275,7 @@ submitNames.addEventListener('click', function(){
     player2.name = player2Name.value;
     scoreKeeperOne.innerHTML = player1.name;
     scoreKeeperTwo.innerHTML = player2.name;
+    scoreKeeperTwoName.style.display = "inline-block" // here
     promptWrapper.style.display = "none";
     notifications();
 })
@@ -235,6 +325,8 @@ function resetGame(){
     player1.turn = true;
     player2.turn = false;
 };
+// toggle button (1 player / 2 player)
+const togglePlay = document.getElementById('togglePlay');
 // reset a tie
 function tieReset(){
     if (turnCounter.position.topLeft == true && turnCounter.position.topCenter == true &&

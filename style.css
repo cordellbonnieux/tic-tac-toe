@@ -31,7 +31,8 @@ button,input,#submit{
         #promptChoiceWrapper{
             height:70px;
             width:400px;
-            margin:10px auto;
+            margin:0 auto;
+            padding:10px;
         }
         .promptScreen{
             color:#78ff9a;
@@ -45,7 +46,7 @@ button,input,#submit{
                 color:#78ff9a;
             }
             #promptBox .left, #promptBox .right{
-
+                
             }
         #promptBox button, #submit, #playerConsole button{
             padding:8px;
@@ -59,12 +60,13 @@ button,input,#submit{
         #promptBox button:hover, #submit:hover, #playerConsole button:hover{
             margin:6px 6px 2px 2px;
             box-shadow:0px 0px #958b8b;
+            overflow:hidden;
+            position:relative;
         }
         #scoreKeeperOneName,#scoreKeeperTwoName{
             display:inline-block;
             width:115px;
         }
-        /* keep hidden until called */
         #nameInputForm{
             display:none;
         }
@@ -120,11 +122,11 @@ button,input,#submit{
         
 .left{
     display:inline-block;
-    max-width:50%;
+    max-width:48%;
 }
 .right{
     display:inline-block;
-    max-width:50%;
+    max-width:48%;
 }
 #playerConsole{
     margin:0 auto 10px auto;
