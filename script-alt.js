@@ -38,186 +38,213 @@ function winnerTest(player){
         player.position.bottomRight == true && player.position.middleRight && player.position.topRight){
             player.score++;
             if (player.score >= 3){
-                alert(`${player.name} wins the game!`);
-                notificationArea.innerHTML = `${player.name} wins the game!`;
-                promptScreenWelcome.style.display = "none";
-                playAgain.style.display = "block";
-                twoPlayer.style.display = "inline-block";
-                onePlayer.style.display = "inline-block";
-                nameInputForm.style.display = "none"
-                promptWrapper.style.display = "block";
-                return assignBoard(), resetGame();
+                function gameWinner(){
+                    alert(`${player.name} wins the game!`);
+                    notificationArea.innerHTML = `${player.name} wins the game!`;
+                    promptScreenWelcome.style.display = "none";
+                    playAgain.style.display = "block";
+                    twoPlayer.style.display = "inline-block";
+                    onePlayer.style.display = "inline-block";
+                    nameInputForm.style.display = "none"
+                    promptWrapper.style.display = "block";
+                }
+                return gameWinner(), assignBoard(), resetGame();
             } else if (player.score < 3){
                 alert(`${player.name} wins the round!`);
                 return resetBoard();
-            } else{
-                return;
-            }
+            } else { return resetBoard();}
         }
 };
 // create function to call when button is clicked
 function buttonClick(pos){
     let tile = pos;
+    let oldScore = player1.score;
     if (player1.turn == true){ 
         if (tile == topLeft && player2.position.topLeft == false && player1.position.topLeft == false){
             player1.position.topLeft = true;
             turnCounter.position.topLeft = true;
+            return player1After();
         } else if (tile == topCenter && player2.position.topCenter == false && player1.position.topCenter == false){
             player1.position.topCenter = true;
             turnCounter.position.topCenter = true;
+            return player1After();
         } else if (tile == topRight && player2.position.topRight == false && player1.position.topRight == false){
             player1.position.topRight = true;
             turnCounter.position.topRight = true;
+            return player1After();
         } else if (tile == middleLeft && player2.position.middleLeft == false && player1.position.middleLeft == false){
             player1.position.middleLeft = true;
             turnCounter.position.middleLeft = true;
+            return player1After();
         } else if (tile == middleCenter && player2.position.middleCenter == false && player1.position.middleCenter == false){
             player1.position.middleCenter = true;
             turnCounter.position.middleCenter = true;
+            return player1After();
         } else if (tile == middleRight && player2.position.middleRight == false && player1.position.middleRight == false){
             player1.position.middleRight = true;
             turnCounter.position.middleRight = true;
+            return player1After();
         } else if (tile == bottomLeft && player2.position.bottomLeft == false && player1.position.bottomLeft == false){
             player1.position.bottomLeft = true;
             turnCounter.position.bottomLeft = true;
+            return player1After();
         } else if (tile == bottomCenter && player2.position.bottomCenter == false && player1.position.bottomCenter == false){
             player1.position.bottomCenter = true;
             turnCounter.position.bottomCenter = true;
+            return player1After();
         } else if (tile == bottomRight && player2.position.bottomRight == false && player1.position.bottomRight == false){
             player1.position.bottomRight = true;
             turnCounter.position.bottomRight = true;
-        } else { 
-            return;
-        }
-        tile.innerHTML = "x";
-        tile.style.color = "#78ff9a";
-        player1.turn = false;
-        player2.turn = true;
-        winnerTest(player1);
-        tieReset()
-        scoreOne.innerHTML = player1.score;
-        notifications();
-        console.log("player1 just fired");
+            return player1After();
+        } else { return };
+        function player1After(){
+            tile.innerHTML = "x";
+            tile.style.color = "#78ff9a";
+            player1.turn = false;
+            player2.turn = true;
+            winnerTest(player1);
+            tieReset();
+            scoreOne.innerHTML = player1.score;
+            let newScore = player1.score;
+            notifications();
+            console.log("player1 just fired");
+            if (player2.computer == true && player2.turn == true && player1.turn == false && oldScore == newScore){
+                return aiLogic(), notifications();
+            } else if (oldScore < newScore){
+                return resetBoard();
+            } else { return };
+            // winner test here?
+        };
     } else if (player2.turn == true && player2.computer == false){ 
         if (tile == topLeft && player1.position.topLeft == false && player2.position.topLeft == false){
             player2.position.topLeft = true;
             turnCounter.position.topLeft = true;
+            return player2After();
         } else if (tile == topCenter && player1.position.topCenter == false && player2.position.topCenter == false){
             player2.position.topCenter = true;
             turnCounter.position.topCenter = true;
+            return player2After();
         } else if (tile == topRight && player1.position.topRight == false && player2.position.topRight == false){
             player2.position.topRight = true;
             turnCounter.position.topRight = true;
+            return player2After();
         } else if (tile == middleLeft && player1.position.middleLeft == false && player2.position.middleLeft == false){
             player2.position.middleLeft = true;
             turnCounter.position.middleLeft = true;
+            return player2After();
         } else if (tile == middleCenter && player1.position.middleCenter == false && player2.position.middleCenter == false){
             player2.position.middleCenter = true;
             turnCounter.position.middleCenter = true;
+            return player2After();
         } else if (tile == middleRight && player1.position.middleRight == false && player2.position.middleRight == false){
             player2.position.middleRight = true;
             turnCounter.position.middleRight = true;
+            return player2After();
         } else if (tile == bottomLeft && player1.position.bottomLeft == false && player2.position.bottomLeft == false){
             player2.position.bottomLeft = true;
             turnCounter.position.bottomLeft = true;
+            return player2After();
         } else if (tile == bottomCenter && player1.position.bottomCenter == false && player2.position.bottomCenter == false){
             player2.position.bottomCenter = true;
             turnCounter.position.bottomCenter = true;
+            return player2After();
         } else if (tile == bottomRight && player1.position.bottomRight == false && player2.position.bottomRight == false){
             player2.position.bottomRight = true;
             turnCounter.position.bottomRight = true;
-        } else {
-            return;
-        }
-        tile.innerHTML = "o";
-        tile.style.color = "#78ff9a";
-        player2.turn = false;
-        player1.turn = true;
-        winnerTest(player2);
-        tieReset()
-        scoreTwo.innerHTML = player2.score;
-        notifications();
-        console.log("player2 just fired");
-    } else {
-        return;
+            return player2After();
+        } else { return };
+        function player2After(){
+            tile.innerHTML = "o";
+            tile.style.color = "#78ff9a";
+            scoreTwo.innerHTML = player2.score;
+            console.log("player2 just fired");
+            player2.turn = false;
+            player1.turn = true;
+            winnerTest(player2);
+            tieReset();
+            notifications();
+        } 
     }
-}
+};
 // AI logic
 function aiLogic(){
-    function chooseRandom(){
-        function randomChoice(arr) {
-            return arr[Math.floor(arr.length * Math.random())];
+    if (player2.computer === true){
+        function chooseRandom(){
+            function randomChoice(arr) {
+                return arr[Math.floor(arr.length * Math.random())];
+            };
+            let compChoice = [1,2,3,4,5,6,7,8,9];
+            let choice = randomChoice(compChoice);
+            if (choice == 1 && turnCounter.position.topLeft == false && player2.computer == true){
+                topLeft.innerHTML = "o";
+                topLeft.style.color = "#78ff9a";
+                player2.position.topLeft = true;
+                turnCounter.position.topLeft = true;
+                return compChoiceAfter();
+            } else if (choice == 2 && turnCounter.position.topCenter == false && player2.computer == true){
+                topCenter.innerHTML = "o";
+                topCenter.style.color = "#78ff9a";
+                player2.position.topCenter = true;
+                turnCounter.position.topCenter = true;
+                return compChoiceAfter();
+            } else if (choice == 3 && turnCounter.position.topRight == false && player2.computer == true){
+                topRight.innerHTML = "o";
+                topRight.style.color = "#78ff9a";
+                player2.position.topRight = true;
+                turnCounter.position.topRight = true;
+                return compChoiceAfter();
+            } else if (choice == 4 && turnCounter.position.middleLeft == false && player2.computer == true){
+                middleLeft.innerHTML = "o";
+                middleLeft.style.color = "#78ff9a";
+                player2.position.middleLeft = true;
+                turnCounter.position.middleLeft = true;
+                return compChoiceAfter();
+            } else if (choice == 5 && turnCounter.position.middleCenter == false && player2.computer == true){
+                middleCenter.innerHTML = "o";
+                middleCenter.style.color = "#78ff9a";
+                player2.position.middleCenter = true;
+                turnCounter.position.middleCenter = true;
+                return compChoiceAfter();  
+            } else if (choice == 6 && turnCounter.position.middleRight == false && player2.computer == true){
+                middleRight.innerHTML = "o";
+                middleRight.style.color = "#78ff9a";
+                player2.position.middleRight = true;
+                turnCounter.position.middleRight = true;
+                return compChoiceAfter(); 
+            } else if (choice == 7 && turnCounter.position.bottomLeft == false && player2.computer == true){
+                bottomLeft.innerHTML = "o";
+                bottomLeft.style.color = "#78ff9a";
+                player2.position.bottomLeft = true;
+                turnCounter.position.bottomLeft = true;
+                return compChoiceAfter(); 
+            } else if (choice == 8 && turnCounter.position.bottomCenter == false && player2.computer == true){
+                bottomCenter.innerHTML = "o";
+                bottomCenter.style.color = "#78ff9a";
+                player2.position.bottomCenter = true;
+                turnCounter.position.bottomCenter = true;
+                return compChoiceAfter();  
+            } else if (choice == 9 && turnCounter.position.bottomRight == false && player2.computer == true){
+                bottomRight.innerHTML = "o";
+                bottomRight.style.color = "#78ff9a";
+                player2.position.bottomRight = true;
+                turnCounter.position.bottomRight = true;
+                return compChoiceAfter();  
+            } else {
+                return chooseRandom();
+            }
         };
-        let compChoice = [1,2,3,4,5,6,7,8,9];
-        let choice = randomChoice(compChoice);
-        if (choice == 1 && turnCounter.position.topLeft == false){
-            topLeft.innerHTML = "o";
-            topLeft.style.color = "#78ff9a";
-            player2.position.topLeft = true;
-            turnCounter.position.topLeft = true;
-            return;
-        } else if (choice == 2 && turnCounter.position.topCenter == false){
-            topCenter.innerHTML = "o";
-            topCenter.style.color = "#78ff9a";
-            player2.position.topCenter = true;
-            turnCounter.position.topCenter = true;
-            return;
-        } else if (choice == 3 && turnCounter.position.topRight == false){
-            topRight.innerHTML = "o";
-            topRight.style.color = "#78ff9a";
-            player2.position.topRight = true;
-            turnCounter.position.topRight = true;
-            return;
-        } else if (choice == 4 && turnCounter.position.middleLeft == false){
-            middleLeft.innerHTML = "o";
-            middleLeft.style.color = "#78ff9a";
-            player2.position.middleLeft = true;
-            turnCounter.position.middleLeft = true;
-            return;
-        } else if (choice == 5 && turnCounter.position.middleCenter == false){
-            middleCenter.innerHTML = "o";
-            middleCenter.style.color = "#78ff9a";
-            player2.position.middleCenter = true;
-            turnCounter.position.middleCenter = true;
-            return;  
-        } else if (choice == 6 && turnCounter.position.middleRight == false){
-            middleRight.innerHTML = "o";
-            middleRight.style.color = "#78ff9a";
-            player2.position.middleRight = true;
-            turnCounter.position.middleRight = true;
-            return; 
-        } else if (choice == 7 && turnCounter.position.bottomLeft == false){
-            bottomLeft.innerHTML = "o";
-            bottomLeft.style.color = "#78ff9a";
-            player2.position.bottomLeft = true;
-            turnCounter.position.bottomLeft = true;
-            return; 
-        } else if (choice == 8 && turnCounter.position.bottomCenter == false){
-            bottomCenter.innerHTML = "o";
-            bottomCenter.style.color = "#78ff9a";
-            player2.position.bottomCenter = true;
-            turnCounter.position.bottomCenter = true;
-            return;  
-        } else if (choice == 9 && turnCounter.position.bottomRight == false){
-            bottomRight.innerHTML = "o";
-            bottomRight.style.color = "#78ff9a";
-            player2.position.bottomRight = true;
-            turnCounter.position.bottomRight = true;
-            return;  
-        } else {
-            return chooseRandom();
+        function compChoiceAfter(){
+            player2.turn = false;
+            player1.turn = true;
+            winnerTest(player2);
+            tieReset()
+            scoreTwo.innerHTML = player2.score;
+            notifications();
+            console.log("AI player just fired");
         }
-    };
-    chooseRandom();
-    winnerTest(player2);
-    tieReset()
-    scoreTwo.innerHTML = player2.score;
-    notifications();
-    player2.turn = false;
-    player1.turn = true;
-    console.log("AI player just fired");
-    return;
-}
+        return chooseRandom();
+    } else { return };
+};
 function assignBoard(){
     // assign positions to variables 
     const topLeft = document.getElementById('topLeft');
@@ -246,38 +273,50 @@ const promptWrapper = document.getElementById('promptWrapper');
 // One Player / VS Computer
 const onePlayer = document.getElementById('computer');
 onePlayer.addEventListener('click', function(){
-    // When I build the AI, this is where I would activate it!
-    twoPlayer.style.display = "none";
-    onePlayer.style.display = "none";
-    nameInputForm.style.display = "block"
-    scoreKeeperTwoName.style.display = "none" // here
-    player2.computer = true;
-    player2Name.value = "Computer";
-    togglePlay.innerHTML = "Switch to 2 Player";
-    notifications();
+    function onePlayerInit() {
+        player1Name.value = "Enter your name";
+        twoPlayer.style.display = "none";
+        onePlayer.style.display = "none";
+        nameInputForm.style.display = "block"
+        scoreKeeperTwoName.style.display = "none" // here
+        player2.computer = true;
+        player2Name.value = "Computer";
+        togglePlay.innerHTML = "Switch to 2 Player";
+        notifications();
+    };
+    return onePlayerInit();
 });
 // Two players / local play
 const twoPlayer = document.getElementById('local');
 const nameInputForm = document.getElementById('nameInputForm');
 twoPlayer.addEventListener('click', function(){
-    player2.computer = false;
-    twoPlayer.style.display = "none";
-    onePlayer.style.display = "none";
-    nameInputForm.style.display = "block"
-    togglePlay.innerHTML = "Switch to 1 Player";
+    function twoPlayerInit(){
+        player2.computer = false;
+        player1Name.value = "Player One Name";
+        player2Name.value = "Player Two Name";
+        twoPlayer.style.display = "none";
+        onePlayer.style.display = "none";
+        nameInputForm.style.display = "block"
+        togglePlay.innerHTML = "Switch to 1 Player";
+    };
+    return twoPlayerInit();
 });
 // Allows plays to enter their names
 const player1Name = document.getElementById('scoreKeeperOneName');
 const player2Name = document.getElementById('scoreKeeperTwoName');
 const submitNames = document.getElementById('submit');
 submitNames.addEventListener('click', function(){
-    player1.name = player1Name.value;
-    player2.name = player2Name.value;
-    scoreKeeperOne.innerHTML = player1.name;
-    scoreKeeperTwo.innerHTML = player2.name;
-    scoreKeeperTwoName.style.display = "inline-block" // here
-    promptWrapper.style.display = "none";
-    notifications();
+    function enterNames(){
+        player1.name = player1Name.value;
+        player2.name = player2Name.value;
+        scoreKeeperOne.innerHTML = player1.name;
+        scoreKeeperTwo.innerHTML = player2.name;
+        scoreKeeperTwoName.style.display = "inline-block" // here
+        promptWrapper.style.display = "none";
+        notifications();
+        resetGame();
+    };
+    return enterNames();
 })
 // Play Again? Screen
 const promptScreenWelcome = document.getElementById('promptScreenWelcome');
@@ -312,6 +351,9 @@ function resetBoard(){
     turnCounter.position.middleLeft = false, turnCounter.position.middleCenter = false, turnCounter.position.middleRight = false,
     turnCounter.position.bottomLeft = false, turnCounter.position.bottomCenter = false, turnCounter.position.bottomright = false;
     notifications();
+    if (player2.turn == true && player2.computer == true){
+        return aiLogic();
+    } else { return };
 };
 // Reset the game (and button)
 const resetGameButton = document.getElementById('resetGame');
