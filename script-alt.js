@@ -28,14 +28,14 @@ const player2 = createPlayer('player2', false); // use for local & AI
 const turnCounter = createPlayer("turn counter", false);
 // test each time a position is chosen to check for winner
 function winnerTest(player){
-    if (player.position.topLeft == true && player.position.topCenter && player.position.topRight ||
-        player.position.topLeft == true && player.position.middleCenter && player.position.bottomRight ||
-        player.position.topLeft == true && player.position.middleLeft && player.position.bottomLeft ||
-        player.position.bottomRight == true && player.position.bottomCenter && player.position.bottomLeft ||
-        player.position.bottomLeft == true && player.position.middleCenter && player.position.topRight ||
-        player.position.middleLeft == true && player.position.middleCenter && player.position.middleRight ||
-        player.position.topCenter == true && player.position.middleCenter && player.position.bottomCenter ||
-        player.position.bottomRight == true && player.position.middleRight && player.position.topRight){
+    if (player.position.topLeft && player.position.topCenter && player.position.topRight ||
+        player.position.topLeft && player.position.middleCenter && player.position.bottomRight ||
+        player.position.topLeft && player.position.middleLeft && player.position.bottomLeft ||
+        player.position.bottomRight && player.position.bottomCenter && player.position.bottomLeft ||
+        player.position.bottomLeft && player.position.middleCenter && player.position.topRight ||
+        player.position.middleLeft && player.position.middleCenter && player.position.middleRight ||
+        player.position.topCenter && player.position.middleCenter && player.position.bottomCenter ||
+        player.position.bottomRight && player.position.middleRight && player.position.topRight){
             player.score++;
             if (player.score >= 3){
                 function gameWinner(){
@@ -51,14 +51,23 @@ function winnerTest(player){
                 return gameWinner(), assignBoard(), resetGame();
             } else if (player.score < 3){
                 alert(`${player.name} wins the round!`);
-                return resetBoard();
-            } else { return resetBoard();}
+                function computerFirstMove(){
+                    if (player2.computer == true && player1.turn == false && player2.turn == true){
+                        return aiLogic();
+                    } else { return };
+                };
+                return assignBoard, resetBoard(), computerFirstMove();
+            } else { return assignBoard(),resetBoard();}
         }
 };
 // create function to call when button is clicked
 function buttonClick(pos){
     let tile = pos;
-    let oldScore = player1.score;
+    let oldScore1 = player1.score;
+    let newScore1 = player1.score;
+    let oldScore2 = player2.score;
+    let newScore2 = player2.score;
+    console.log(`player 1 score is ${oldScore1} before execution.`);
     if (player1.turn == true){ 
         if (tile == topLeft && player2.position.topLeft == false && player1.position.topLeft == false){
             player1.position.topLeft = true;
@@ -105,17 +114,36 @@ function buttonClick(pos){
             winnerTest(player1);
             tieReset();
             scoreOne.innerHTML = player1.score;
-            let newScore = player1.score;
+            newScore1 = player1.score;
+            newScore2 = player2.score;
+            console.log(`player 1 score is ${newScore1} after execution.`);
             notifications();
             console.log("player1 just fired");
-            if (player2.computer == true && player2.turn == true && player1.turn == false && oldScore == newScore){
-                return aiLogic(), notifications();
-            } else if (oldScore < newScore){
-                return resetBoard();
-            } else { return };
+            function compCheck(){
+                if (player2.computer == true && player2.turn == true && player1.turn == false && oldScore1 == newScore1){
+                    return aiLogic(), notifications(),newScore2 = player2.score,newScore1 = player1.score;
+                } else if (oldScore1 < newScore1){
+                    return resetBoard(),newScore2 = player2.score,newScore1 = player1.score;
+                } else { return };
+            }
+            compCheck();
             // winner test here?
         };
-    } else if (player2.turn == true && player2.computer == false){ 
+        // im resetting the board within the winnertest function which then spits back out into this function
+        // the reason this isnot okay, is because then this "else if" statement fires off as the last clicked tile by the previous player.
+    // make it stop here so it doesnt execute this part after a round change
+    } else if (player2.turn == true && player2.computer == false && newScore1 === newScore1 && newScore2 === newScore2){ 
+        function player2After(){
+            tile.innerHTML = "o";
+            tile.style.color = "#78ff9a";
+            scoreTwo.innerHTML = player2.score;
+            console.log("player2 just fired");
+            player2.turn = false;
+            player1.turn = true;
+            winnerTest(player2);
+            tieReset();
+            notifications();
+        } 
         if (tile == topLeft && player1.position.topLeft == false && player2.position.topLeft == false){
             player2.position.topLeft = true;
             turnCounter.position.topLeft = true;
@@ -153,22 +181,11 @@ function buttonClick(pos){
             turnCounter.position.bottomRight = true;
             return player2After();
         } else { return };
-        function player2After(){
-            tile.innerHTML = "o";
-            tile.style.color = "#78ff9a";
-            scoreTwo.innerHTML = player2.score;
-            console.log("player2 just fired");
-            player2.turn = false;
-            player1.turn = true;
-            winnerTest(player2);
-            tieReset();
-            notifications();
-        } 
     }
 };
 // AI logic
 function aiLogic(){
-    if (player2.computer === true){
+    if (player2.computer === true && player2.turn){
         function chooseRandom(){
             function randomChoice(arr) {
                 return arr[Math.floor(arr.length * Math.random())];
@@ -258,7 +275,7 @@ function assignBoard(){
     const bottomRight = document.getElementById('bottomRight');
     // Assign event listeners to position variables
     topLeft.addEventListener('click', function(){return buttonClick(topLeft)});
-    topCenter.addEventListener('click', function(){return buttonClick(topCenter)});
+    topCenter.addEventListener('click', function(){return buttonClick(topCenter);});
     topRight.addEventListener('click', function(){return buttonClick(topRight)});
     middleLeft.addEventListener('click', function(){return buttonClick(middleLeft)});
     middleCenter.addEventListener('click', function(){return buttonClick(middleCenter)});
@@ -349,11 +366,8 @@ function resetBoard(){
     player2.position.bottomLeft = false, player2.position.bottomCenter = false, player2.position.bottomRight = false;
     turnCounter.position.topLeft = false, turnCounter.position.topCenter =false, turnCounter.position.topRight = false,
     turnCounter.position.middleLeft = false, turnCounter.position.middleCenter = false, turnCounter.position.middleRight = false,
-    turnCounter.position.bottomLeft = false, turnCounter.position.bottomCenter = false, turnCounter.position.bottomright = false;
+    turnCounter.position.bottomLeft = false, turnCounter.position.bottomCenter = false, turnCounter.position.bottomRight = false;
     notifications();
-    if (player2.turn == true && player2.computer == true){
-        return aiLogic();
-    } else { return };
 };
 // Reset the game (and button)
 const resetGameButton = document.getElementById('resetGame');
@@ -382,6 +396,15 @@ function tieReset(){
             return
         }
 };
+// check for round change
+let roundChangeMarker
+function roundChange(){
+    if (turnCounter.position.topLeft || turnCounter.position.topCenter || turnCounter.position.topRight ||
+        turnCounter.position.middleLeft || turnCounter.position.middleCenter || turnCounter.position.middleRight ||
+        turnCounter.position.bottomLeft || turnCounter.position.bottomCenter || turnCounter.position.bottomRight){
+                /// maybe do something...
+        } 
+}
 
 
 
