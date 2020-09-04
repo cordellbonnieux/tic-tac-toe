@@ -612,9 +612,10 @@ onePlayer.addEventListener('click', function(){
     twoPlayer.style.display = "none";
     onePlayer.style.display = "none";
     nameInputForm.style.display = "block"
+    nameInputForm.classList.add("single");
     scoreKeeperTwoName.style.display = "none" // here
     player2Name.value = "Computer";
-    player2.computer = true;
+    player2.computer = true; 
     assignBoard();
     resetGame();
     notifications();
@@ -629,6 +630,7 @@ twoPlayer.addEventListener('click', function(){
     twoPlayer.style.display = "none";
     onePlayer.style.display = "none";
     nameInputForm.style.display = "block"
+    nameInputForm.classList.remove("single");
     player2.computer = false;
     assignBoard();
     resetGame();

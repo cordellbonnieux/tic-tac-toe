@@ -2,6 +2,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet"> 
     <link type="text/css" href="style.css" rel="stylesheet"></link>
+    <title>Cordell's Tic-Tac-Toe</title>
 </head>
 <body>
     <div id="promptWrapper">
@@ -16,12 +17,12 @@
                 <h1>Play again?</h1>
             </div>
             <div id="promptChoiceWrapper">
-                <div class="left"><button id="computer">1 Player</button></div>
-                <div class="right"><button id="local">2 Player</button></div>
+                <div class="left"><button id="computer" class="greyButton">1 Player</button></div>
+                <div class="right"><button id="local" class="greyButton">2 Player</button></div>
                 <form id="nameInputForm" onsubmit="return false">
                     <input class="left" type="text" maxlength="15" id="scoreKeeperOneName" value="Player One Name"></input>
                     <input class="right" type="text" maxlength="15" id="scoreKeeperTwoName" value="Player Two Name"></input>
-                    <input type="submit" id="submit" value="submit"></input>
+                    <input type="submit" id="submit" class="greyButton" value="submit"></input>
                 </form>
             </div>
         </div>
@@ -51,8 +52,8 @@
             <div id="notificationArea"></div>
         </div>
         <div class="right">
-            <button id="resetBoard">Reset The Board</button>
-            <button id="resetGame">Reset The Game</button>
+            <button id="resetBoard" class="greyButton">Reset The Board</button>
+            <button id="resetGame" class="greyButton">Reset The Game</button>
         </div>
     </div>
     <script src="script-alt.js"></script>
