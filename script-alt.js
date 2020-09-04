@@ -549,108 +549,55 @@ function assignBoard(){
     // Assign event listeners to position variables
     topLeft.addEventListener('click', function(){
         turnCounter.postScore = false;
-        console.log('button was just pressed');
-        oldScore = player1.score;
-        oldScore2 = player2.score;
-        console.log(`oldscores before buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
         buttonClick(topLeft);
-        console.log(`oldscores after buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
-        //nextRound(oldScore, oldScore2);
         event.stopImmediatePropagation();
         return
     });
     topCenter.addEventListener('click', function(){
         turnCounter.postScore = false;
-        console.log('button was just pressed');
-        oldScore = player1.score;
-        oldScore2 = player2.score;
-        console.log(`oldscores before buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
         buttonClick(topCenter);
-        console.log(`oldscores after buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
-        //nextRound(oldScore, oldScore2);
         event.stopImmediatePropagation();
         return
     });
     topRight.addEventListener('click', function(){
         turnCounter.postScore = false;
-        console.log('button was just pressed');
-        oldScore = player1.score;
-        oldScore2 = player2.score;
-        console.log(`oldscores before buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
         buttonClick(topRight);
-        console.log(`oldscores after buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
-        //nextRound(oldScore, oldScore2);
         event.stopImmediatePropagation();
         return
     });
     middleLeft.addEventListener('click', function(){
         turnCounter.postScore = false;
-        console.log('button was just pressed');
-        oldScore = player1.score;
-        oldScore2 = player2.score;
-        console.log(`oldscores before buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
         buttonClick(middleLeft);
-        console.log(`oldscores after buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
-        //nextRound(oldScore, oldScore2);
         event.stopImmediatePropagation();
         return
     });
     middleCenter.addEventListener('click', function(){
         turnCounter.postScore = false;
-        console.log('button was just pressed');
-        oldScore = player1.score;
-        oldScore2 = player2.score;
-        console.log(`oldscores before buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
         buttonClick(middleCenter);
-        //nextRound(oldScore, oldScore2);
         event.stopImmediatePropagation();
         return
     });
     middleRight.addEventListener('click', function(){
         turnCounter.postScore = false;
-        console.log('button was just pressed');
-        oldScore = player1.score;
-        oldScore2 = player2.score;
-        console.log(`oldscores before buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
         buttonClick(middleRight);
-        console.log(`oldscores after buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
-        //nextRound(oldScore, oldScore2);
         event.stopImmediatePropagation();
         return
     });
     bottomLeft.addEventListener('click', function(){
         turnCounter.postScore = false;
-        console.log('button was just pressed');
-        oldScore = player1.score;
-        oldScore2 = player2.score;
-        console.log(`oldscores before buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
         buttonClick(bottomLeft);
-        console.log(`oldscores after buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
-        //nextRound(oldScore, oldScore2);
         event.stopImmediatePropagation();
         return
     });
     bottomCenter.addEventListener('click', function(){
         turnCounter.postScore = false;
-        console.log('button was just pressed');
-        oldScore = player1.score;
-        oldScore2 = player2.score;
-        console.log(`oldscores before buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
         buttonClick(bottomCenter);
-        console.log(`oldscores after buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
-        //nextRound(oldScore, oldScore2);
         event.stopImmediatePropagation();
         return
     });
     bottomRight.addEventListener('click', function(){
         turnCounter.postScore = false;
-        console.log('button was just pressed');
-        oldScore = player1.score;
-        oldScore2 = player2.score;
-        console.log(`oldscores before buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
         buttonClick(bottomRight);
-        console.log(`oldscores after buttonclick 1 = ${oldScore} and 2 = ${oldScore2} `);
-        //nextRound(oldScore, oldScore2);
         event.stopImmediatePropagation();
         return
     });
@@ -736,7 +683,6 @@ function resetBoard(){
     turnCounter.position.middleLeft = false, turnCounter.position.middleCenter = false, turnCounter.position.middleRight = false,
     turnCounter.position.bottomLeft = false, turnCounter.position.bottomCenter = false, turnCounter.position.bottomRight = false;
     notifications();
-
     return
 };
 // Reset the game (and button)
@@ -753,20 +699,6 @@ function resetGame(){
     player2.turn = false;
     return
 };
-// next round
-function nextRound(x,y){
-    if (turnCounter.postScore == true && x < player1.score || y < player2.score){
-        resetBoard();
-        notificationArea.innerHTML = "Ready for the next round? Click here:";
-        console.log('button finished click with next round');
-        return
-    } else {
-        console.log('button finished click without next round');
-        return
-    }
-};
-
-
 // reset a tie
 function tieReset(){
     if (turnCounter.position.topLeft == true && turnCounter.position.topCenter == true &&
