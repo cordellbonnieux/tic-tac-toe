@@ -36,331 +36,153 @@ function winnerTest(player){
         player.position.middleLeft && player.position.middleCenter && player.position.middleRight ||
         player.position.topCenter && player.position.middleCenter && player.position.bottomCenter ||
         player.position.bottomRight && player.position.middleRight && player.position.topRight){
-        player.score++;
-        if (player.score >= 3){
-            alert(`${player.name} wins the game!`);
-            assignBoard();
-            resetGame();
-            promptScreenWelcome.style.display = "none";
-            playAgain.style.display = "block";
-            twoPlayer.style.display = "inline-block";
-            onePlayer.style.display = "inline-block";
-            nameInputForm.style.display = "none"
-            promptWrapper.style.display = "block";
-            return
-        } else if (player.score < 3){
-            alert(`${player.name} wins the round!`);
-            resetBoard();
-            return
-        } else {
-            return
+            player.score++;
+            if (player.score >= 3){
+                function gameWinner(){
+                    alert(`${player.name} wins the game!`);
+                    notificationArea.innerHTML = `${player.name} wins the game!`;
+                    promptScreenWelcome.style.display = "none";
+                    playAgain.style.display = "block";
+                    twoPlayer.style.display = "inline-block";
+                    onePlayer.style.display = "inline-block";
+                    nameInputForm.style.display = "none"
+                    promptWrapper.style.display = "block";
+                };
+                return gameWinner(), assignBoard(), resetGame();
+                } else if (player.score < 3){
+                    alert(`${player.name} wins the round!`);
+                    function computerFirstMove(){
+                        if (player2.computer == true && player1.turn == false && player2.turn == true){
+                            return aiLogic();
+                     } else { return };
+                };
+                return assignBoard(), resetBoard();
+            } else { return assignBoard(),resetBoard();}
         }
-    } else {
-        return
-    }
 };
 // create function to call when button is clicked
-// 3rd attempt
 function buttonClick(pos){
     let tile = pos;
-    // player 1 - one player match (vs computer)
-    if (player1.turn && player2.computer){
-        if (tile == topLeft && turnCounter.position.topLeft == false){
+    let oldScore1 = player1.score;
+    let newScore1 = player1.score;
+    let oldScore2 = player2.score;
+    let newScore2 = player2.score;
+    console.log(`player 1 score is ${oldScore1} before execution.`);
+    if (player1.turn == true){ 
+        if (tile == topLeft && player2.position.topLeft == false && player1.position.topLeft == false){
             player1.position.topLeft = true;
             turnCounter.position.topLeft = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            aiLogic();
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == topCenter && turnCounter.position.topCenter == false){
+            return player1After();
+        } else if (tile == topCenter && player2.position.topCenter == false && player1.position.topCenter == false){
             player1.position.topCenter = true;
             turnCounter.position.topCenter = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            aiLogic();
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == topRight && turnCounter.position.topRight == false){
+            return player1After();
+        } else if (tile == topRight && player2.position.topRight == false && player1.position.topRight == false){
             player1.position.topRight = true;
             turnCounter.position.topRight = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            aiLogic();
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == middleLeft && turnCounter.position.middleLeft == false){
+            return player1After();
+        } else if (tile == middleLeft && player2.position.middleLeft == false && player1.position.middleLeft == false){
             player1.position.middleLeft = true;
             turnCounter.position.middleLeft = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            aiLogic();
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == middleCenter && turnCounter.position.middleCenter == false){
+            return player1After();
+        } else if (tile == middleCenter && player2.position.middleCenter == false && player1.position.middleCenter == false){
             player1.position.middleCenter = true;
             turnCounter.position.middleCenter = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            aiLogic();
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == middleRight && turnCounter.position.middleRight == false){
+            return player1After();
+        } else if (tile == middleRight && player2.position.middleRight == false && player1.position.middleRight == false){
             player1.position.middleRight = true;
             turnCounter.position.middleRight = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            aiLogic();
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == bottomLeft && turnCounter.position.bottomLeft == false){
+            return player1After();
+        } else if (tile == bottomLeft && player2.position.bottomLeft == false && player1.position.bottomLeft == false){
             player1.position.bottomLeft = true;
             turnCounter.position.bottomLeft = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            aiLogic();
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == bottomCenter && turnCounter.position.bottomCenter == false){
+            return player1After();
+        } else if (tile == bottomCenter && player2.position.bottomCenter == false && player1.position.bottomCenter == false){
             player1.position.bottomCenter = true;
             turnCounter.position.bottomCenter = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            aiLogic();
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == bottomRight && turnCounter.position.bottomRight == false){
+            return player1After();
+        } else if (tile == bottomRight && player2.position.bottomRight == false && player1.position.bottomRight == false){
             player1.position.bottomRight = true;
             turnCounter.position.bottomRight = true;
+            return player1After();
+        } else { return };
+        function player1After(){
             tile.innerHTML = "x";
             tile.style.color = "#78ff9a";
-            winnerTest(player1);
             player1.turn = false;
             player2.turn = true;
-            aiLogic();
-            winnerTest(player2);
+            winnerTest(player1);
+            tieReset();
+            scoreOne.innerHTML = player1.score;
+            newScore1 = player1.score;
+            newScore2 = player2.score;
+            console.log(`player 1 score is ${newScore1} after execution.`);
+            notifications();
+            console.log("player1 just fired");
+            function compCheck(){
+                if (player2.computer == true && player2.turn == true && player1.turn == false && oldScore1 == newScore1){
+                    return aiLogic(), notifications(),newScore2 = player2.score,newScore1 = player1.score;
+                } else if (oldScore1 < newScore1){
+                    return resetBoard(),newScore2 = player2.score,newScore1 = player1.score;
+                } else { return };
+            }
+            compCheck();
+            // winner test here?
+        };
+        // im resetting the board within the winnertest function which then spits back out into this function
+        // the reason this isnot okay, is because then this "else if" statement fires off as the last clicked tile by the previous player.
+    // make it stop here so it doesnt execute this part after a round change
+    } else if (player2.turn == true && player2.computer == false && newScore1 === newScore1 && newScore2 === newScore2){ 
+        function player2After(){
+            tile.innerHTML = "o";
+            tile.style.color = "#78ff9a";
+            scoreTwo.innerHTML = player2.score;
+            console.log("player2 just fired");
             player2.turn = false;
             player1.turn = true;
-            return
-        } else {
-            return
-        }
-    // player 1 - two player match (local)
-    } else if (player1.turn && player2.computer == false){
-        if (tile == topLeft && turnCounter.position.topLeft == false){
-            player1.position.topLeft = true;
-            turnCounter.position.topLeft = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1); // when test goes of change something?
-            player1.turn = false;
-            player2.turn = true; // this is causing an auto choice based on the previous click when a round is won
-            return
-        } else if (tile == topCenter && turnCounter.position.topCenter == false){
-            player1.position.topCenter = true;
-            turnCounter.position.topCenter = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            return
-        } else if (tile == topRight && turnCounter.position.topRight == false){
-            player1.position.topRight = true;
-            turnCounter.position.topRight = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            return
-        } else if (tile == middleLeft && turnCounter.position.middleLeft == false){
-            player1.position.middleLeft = true;
-            turnCounter.position.middleLeft = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            return
-        } else if (tile == middleCenter && turnCounter.position.middleCenter == false){
-            player1.position.middleCenter = true;
-            turnCounter.position.middleCenter = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            return
-        } else if (tile == middleRight && turnCounter.position.middleRight == false){
-            player1.position.middleRight = true;
-            turnCounter.position.middleRight = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            return
-        } else if (tile == bottomLeft && turnCounter.position.bottomLeft == false){
-            player1.position.bottomLeft = true;
-            turnCounter.position.bottomLeft = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            return
-        } else if (tile == bottomCenter && turnCounter.position.bottomCenter == false){
-            player1.position.bottomCenter = true;
-            turnCounter.position.bottomCenter = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            return
-        } else if (tile == bottomRight && turnCounter.position.bottomRight == false){
-            player1.position.bottomRight = true;
-            turnCounter.position.bottomRight = true;
-            tile.innerHTML = "x";
-            tile.style.color = "#78ff9a";
-            winnerTest(player1);
-            player1.turn = false;
-            player2.turn = true;
-            return
-        } else {
-            return
-        }
-    // player 2 - human controlled
-    } else if (player2.turn && player2.computer == false){
-        if (tile == topLeft && turnCounter.position.topLeft == false){
+            winnerTest(player2);
+            tieReset();
+            notifications();
+        } 
+        if (tile == topLeft && player1.position.topLeft == false && player2.position.topLeft == false){
             player2.position.topLeft = true;
             turnCounter.position.topLeft = true;
-            tile.innerHTML = "o";
-            tile.style.color = "#78ff9a";
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == topCenter && turnCounter.position.topCenter == false){
+            return player2After();
+        } else if (tile == topCenter && player1.position.topCenter == false && player2.position.topCenter == false){
             player2.position.topCenter = true;
             turnCounter.position.topCenter = true;
-            tile.innerHTML = "o";
-            tile.style.color = "#78ff9a";
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == topRight && turnCounter.position.topRight == false){
+            return player2After();
+        } else if (tile == topRight && player1.position.topRight == false && player2.position.topRight == false){
             player2.position.topRight = true;
             turnCounter.position.topRight = true;
-            tile.innerHTML = "o";
-            tile.style.color = "#78ff9a";
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == middleLeft && turnCounter.position.middleLeft == false){
+            return player2After();
+        } else if (tile == middleLeft && player1.position.middleLeft == false && player2.position.middleLeft == false){
             player2.position.middleLeft = true;
             turnCounter.position.middleLeft = true;
-            tile.innerHTML = "o";
-            tile.style.color = "#78ff9a";
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == middleCenter && turnCounter.position.middleCenter == false){
+            return player2After();
+        } else if (tile == middleCenter && player1.position.middleCenter == false && player2.position.middleCenter == false){
             player2.position.middleCenter = true;
             turnCounter.position.middleCenter = true;
-            tile.innerHTML = "o";
-            tile.style.color = "#78ff9a";
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == middleRight && turnCounter.position.middleRight == false){
+            return player2After();
+        } else if (tile == middleRight && player1.position.middleRight == false && player2.position.middleRight == false){
             player2.position.middleRight = true;
             turnCounter.position.middleRight = true;
-            tile.innerHTML = "o";
-            tile.style.color = "#78ff9a";
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == bottomLeft && turnCounter.position.bottomLeft == false){
+            return player2After();
+        } else if (tile == bottomLeft && player1.position.bottomLeft == false && player2.position.bottomLeft == false){
             player2.position.bottomLeft = true;
             turnCounter.position.bottomLeft = true;
-            tile.innerHTML = "o";
-            tile.style.color = "#78ff9a";
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == bottomCenter && turnCounter.position.bottomCenter == false){
+            return player2After();
+        } else if (tile == bottomCenter && player1.position.bottomCenter == false && player2.position.bottomCenter == false){
             player2.position.bottomCenter = true;
             turnCounter.position.bottomCenter = true;
-            tile.innerHTML = "o";
-            tile.style.color = "#78ff9a";
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else if (tile == bottomRight && turnCounter.position.bottomRight == false){
+            return player2After();
+        } else if (tile == bottomRight && player1.position.bottomRight == false && player2.position.bottomRight == false){
             player2.position.bottomRight = true;
             turnCounter.position.bottomRight = true;
-            tile.innerHTML = "o";
-            tile.style.color = "#78ff9a";
-            winnerTest(player2);
-            player2.turn = false;
-            player1.turn = true;
-            return
-        } else {
-            return
-        }
-    } else {
-        return
+            return player2After();
+        } else { return };
     }
-}
+};
 // AI logic
 function aiLogic(){
     if (player2.computer === true && player2.turn){
@@ -468,42 +290,51 @@ const promptWrapper = document.getElementById('promptWrapper');
 // One Player / VS Computer
 const onePlayer = document.getElementById('computer');
 onePlayer.addEventListener('click', function(){
-    player1Name.value = "Enter your name";
-    twoPlayer.style.display = "none";
-    onePlayer.style.display = "none";
-    nameInputForm.style.display = "block"
-    scoreKeeperTwoName.style.display = "none" // here
-    player2.computer = true;
-    player2Name.value = "Computer";
-    togglePlay.innerHTML = "Switch to 2 Player";
-    notifications();
+    function onePlayerInit() {
+        player1Name.value = "Enter your name";
+        twoPlayer.style.display = "none";
+        onePlayer.style.display = "none";
+        nameInputForm.style.display = "block"
+        scoreKeeperTwoName.style.display = "none" // here
+        player2.computer = true;
+        player2Name.value = "Computer";
+        togglePlay.innerHTML = "Switch to 2 Player";
+        notifications();
+    };
+    return onePlayerInit();
 });
 // Two players / local play
 const twoPlayer = document.getElementById('local');
 const nameInputForm = document.getElementById('nameInputForm');
 twoPlayer.addEventListener('click', function(){
-    player2.computer = false;
-    player1Name.value = "Player One Name";
-    player2Name.value = "Player Two Name";
-    twoPlayer.style.display = "none";
-    onePlayer.style.display = "none";
-    nameInputForm.style.display = "block"
-    togglePlay.innerHTML = "Switch to 1 Player";
-    notifications();
+    function twoPlayerInit(){
+        player2.computer = false;
+        player1Name.value = "Player One Name";
+        player2Name.value = "Player Two Name";
+        twoPlayer.style.display = "none";
+        onePlayer.style.display = "none";
+        nameInputForm.style.display = "block"
+        togglePlay.innerHTML = "Switch to 1 Player";
+    };
+    return twoPlayerInit();
 });
 // Allows plays to enter their names
 const player1Name = document.getElementById('scoreKeeperOneName');
 const player2Name = document.getElementById('scoreKeeperTwoName');
 const submitNames = document.getElementById('submit');
 submitNames.addEventListener('click', function(){
-    player1.name = player1Name.value;
-    player2.name = player2Name.value;
-    scoreKeeperOne.innerHTML = player1.name;
-    scoreKeeperTwo.innerHTML = player2.name;
-    scoreKeeperTwoName.style.display = "inline-block" // here
-    promptWrapper.style.display = "none";
-    resetGame();
-});
+    function enterNames(){
+        player1.name = player1Name.value;
+        player2.name = player2Name.value;
+        scoreKeeperOne.innerHTML = player1.name;
+        scoreKeeperTwo.innerHTML = player2.name;
+        scoreKeeperTwoName.style.display = "inline-block" // here
+        promptWrapper.style.display = "none";
+        notifications();
+        resetGame();
+    };
+    return enterNames();
+})
 // Play Again? Screen
 const promptScreenWelcome = document.getElementById('promptScreenWelcome');
 const playAgain = document.getElementById('playAgain');
@@ -565,6 +396,15 @@ function tieReset(){
             return
         }
 };
+// check for round change
+let roundChangeMarker
+function roundChange(){
+    if (turnCounter.position.topLeft || turnCounter.position.topCenter || turnCounter.position.topRight ||
+        turnCounter.position.middleLeft || turnCounter.position.middleCenter || turnCounter.position.middleRight ||
+        turnCounter.position.bottomLeft || turnCounter.position.bottomCenter || turnCounter.position.bottomRight){
+                /// maybe do something...
+        } 
+}
 
 
 
