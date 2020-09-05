@@ -603,6 +603,61 @@ function assignBoard(){
     });
 };
 assignBoard();
+// Hover effects for gameBoard tiles
+topLeft.addEventListener('mouseenter', function(){
+    topLeft.style.color = "#484848";
+});
+    topLeft.addEventListener('mouseleave', function(){
+        topLeft.style.color = "#78ff9a";
+    });
+topCenter.addEventListener('mouseenter', function(){
+    topCenter.style.color = "#484848";
+});
+    topCenter.addEventListener('mouseleave', function(){
+        topCenter.style.color = "#78ff9a";
+    });
+topRight.addEventListener('mouseenter', function(){
+    topRight.style.color = "#484848";
+});
+    topRight.addEventListener('mouseleave', function(){
+        topRight.style.color = "#78ff9a";
+    });
+middleLeft.addEventListener('mouseenter', function(){
+    middleLeft.style.color = "#484848";
+});
+    middleLeft.addEventListener('mouseleave', function(){
+        middleLeft.style.color = "#78ff9a";
+    });
+middleCenter.addEventListener('mouseenter', function(){
+    middleCenter.style.color = "#484848";
+});
+    middleCenter.addEventListener('mouseleave', function(){
+        middleCenter.style.color = "#78ff9a";
+    });
+middleRight.addEventListener('mouseenter', function(){
+    middleRight.style.color = "#484848";
+});
+    middleRight.addEventListener('mouseleave', function(){
+        middleRight.style.color = "#78ff9a";
+    });
+bottomLeft.addEventListener('mouseenter', function(){
+    bottomLeft.style.color = "#484848";
+});
+    bottomLeft.addEventListener('mouseleave', function(){
+        bottomLeft.style.color = "#78ff9a";
+    });
+bottomCenter.addEventListener('mouseenter', function(){
+    bottomCenter.style.color = "#484848";
+});
+    bottomCenter.addEventListener('mouseleave', function(){
+        bottomCenter.style.color = "#78ff9a";
+    });
+bottomRight.addEventListener('mouseenter', function(){
+    bottomRight.style.color = "#484848";
+});
+    bottomRight.addEventListener('mouseleave', function(){
+        bottomRight.style.color = "#78ff9a";
+    });
 // Creates the prompt to ask if you will player locally or vs. AI
 const promptWrapper = document.getElementById('promptWrapper');
 // One Player / VS Computer
