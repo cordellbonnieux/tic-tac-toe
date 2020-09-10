@@ -440,7 +440,6 @@ function aiLogic(){
             };
             let compChoice = [1,2,3,4,5,6,7,8,9];
             let choice = randomChoice(compChoice);
-            try here
             if (choice == 1 && turnCounter.position.topLeft == false && player2.computer == true){
                 topLeft.innerHTML = "o";
                 topLeft.style.color = "#78ff9a";
