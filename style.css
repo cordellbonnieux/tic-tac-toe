@@ -106,9 +106,6 @@ button,input,#submit{
             display:none;
             position:absolute;
         }
-        #computer, #local{
-
-        }
         #playAgain{
             display:none;
         }
@@ -154,8 +151,7 @@ button,input,#submit{
         }
             #gameBoard div button:hover{
                 background-color:#78ff9a;
-            }
-        
+            }       
 .left{
     display:inline-block;
     max-width:48%;

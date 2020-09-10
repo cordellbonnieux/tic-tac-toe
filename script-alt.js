@@ -1,9 +1,5 @@
 // open game in private self executing function
 //const game = (function(){
-
-
-// tracking the number of button clicks
-let buttonClicks = 0;
 // player factory function
 function createPlayer(name, turn){
     return {
@@ -41,11 +37,6 @@ function winnerTest(player){
         player.position.topCenter && player.position.middleCenter && player.position.bottomCenter ||
         player.position.bottomRight && player.position.middleRight && player.position.topRight){
         player.score++;
-        console.log(`---- This is right after a point is scored ( winnerTest() ) -----`);
-        console.log(`player one: ${player1.score}, player two: ${player2.score}.`);
-        console.log(`turn counter: ${turnCounter.postScore}, player one turn: ${player1.turn}, player two turn: ${player2.turn}`);
-        console.log(`player two computer: ${player2.computer}`);
-        console.log(`------------------------------------------------`);
         turnCounter.postScore = true;
         scoreOne.innerHTML = player1.score;
         scoreTwo.innerHTML = player2.score;
@@ -59,21 +50,11 @@ function winnerTest(player){
             onePlayer.style.display = "inline-block";
             nameInputForm.style.display = "none"
             promptWrapper.style.display = "block";
-            console.log(`---- This is right after a game is won( winnerTest() -> if (playerScore >= 3) )-----`);
-            console.log(`player one: ${player1.score}, player two: ${player2.score}.`);
-            console.log(`turn counter: ${turnCounter.postScore}, player one turn: ${player1.turn}, player two turn: ${player2.turn}`);
-            console.log(`player two computer: ${player2.computer}`);
-            console.log(`------------------------------------------------`);
             return
             
         } else if (player.score < 3){
             alert(`${player.name} wins the round!`);
             resetBoard();
-            console.log(`---- This is right after the board is reset when a point is scored. ( winnerTest() -> if (player.score < 3) ) -----`);
-            console.log(`player one: ${player1.score}, player two: ${player2.score}.`);
-            console.log(`turn counter: ${turnCounter.postScore}, player one turn: ${player1.turn}, player two turn: ${player2.turn}`);
-            console.log(`player two computer: ${player2.computer}`);
-            console.log(`------------------------------------------------`);
             return
             
         } else {
@@ -91,11 +72,6 @@ function buttonClick(pos){
     oldScore = player1.score;
     // player 1 - one player match (vs computer)
     if (player1.turn && player2.computer && turnCounter.postScore == false){
-        console.log(`---- This is right after player 1 vs Computer is passed ( butonClick(pos) -> player1 vs computer) -----`);
-        console.log(`player one: ${player1.score}, player two: ${player2.score}.`);
-        console.log(`turn counter: ${turnCounter.postScore}, player one turn: ${player1.turn}, player two turn: ${player2.turn}`);
-        console.log(`player two computer: ${player2.computer}`);
-        console.log(`------------------------------------------------`);
         if (tile == topLeft && turnCounter.position.topLeft == false){
             player1.position.topLeft = true;
             turnCounter.position.topLeft = true;
@@ -245,11 +221,6 @@ function buttonClick(pos){
         }
     // player 1 - two player match (local)
     } else if (player1.turn && player2.computer == false && turnCounter.postScore == false){
-        console.log(`---- This is right after player 1 vs player 2 local match is passed ( butonClick(pos) -> player1 vs player2 no computer) -----`);
-        console.log(`player one: ${player1.score}, player two: ${player2.score}.`);
-        console.log(`turn counter: ${turnCounter.postScore}, player one turn: ${player1.turn}, player two turn: ${player2.turn}`);
-        console.log(`player two computer: ${player2.computer}`);
-        console.log(`------------------------------------------------`);
         if (tile == topLeft && turnCounter.position.topLeft == false){
             player1.position.topLeft = true;
             turnCounter.position.topLeft = true;
@@ -354,11 +325,6 @@ function buttonClick(pos){
         }
     // player 2 - human controlled
     } else if (player2.turn && player2.computer == false && oldScore === player1.score && turnCounter.postScore == false){
-        console.log(`---- This is player 2's human control right after player 2 vs player 1 is passed ( butonClick(pos) -> player2 vs player 1) -----`);
-        console.log(`player one: ${player1.score}, player two: ${player2.score}.`);
-        console.log(`turn counter: ${turnCounter.postScore}, player one turn: ${player1.turn}, player two turn: ${player2.turn}`);
-        console.log(`player two computer: ${player2.computer}`);
-        console.log(`------------------------------------------------`);
         if (tile == topLeft && turnCounter.position.topLeft == false){
             player2.position.topLeft = true;
             turnCounter.position.topLeft = true;
@@ -668,7 +634,7 @@ onePlayer.addEventListener('click', function(){
     onePlayer.style.display = "none";
     nameInputForm.style.display = "block"
     nameInputForm.classList.add("single");
-    scoreKeeperTwoName.style.display = "none" // here
+    scoreKeeperTwoName.style.display = "none";
     player2Name.value = "Computer";
     player2.computer = true; 
     assignBoard();
@@ -701,7 +667,7 @@ submitNames.addEventListener('click', function(){
     player2.name = player2Name.value;
     scoreKeeperOne.innerHTML = player1.name;
     scoreKeeperTwo.innerHTML = player2.name;
-    scoreKeeperTwoName.style.display = "inline-block" // here
+    scoreKeeperTwoName.style.display = "inline-block";
     promptWrapper.style.display = "none";
     resetGame();
     return
@@ -736,7 +702,7 @@ function resetBoard(){
     player2.position.topLeft = false, player2.position.topCenter = false, player2.position.topRight = false,
     player2.position.middleLeft = false, player2.position.middleCenter = false, player2.position.middleRight = false,
     player2.position.bottomLeft = false, player2.position.bottomCenter = false, player2.position.bottomRight = false;
-    turnCounter.position.topLeft = false, turnCounter.position.topCenter =false, turnCounter.position.topRight = false,
+    turnCounter.position.topLeft = false, turnCounter.position.topCenter = false, turnCounter.position.topRight = false,
     turnCounter.position.middleLeft = false, turnCounter.position.middleCenter = false, turnCounter.position.middleRight = false,
     turnCounter.position.bottomLeft = false, turnCounter.position.bottomCenter = false, turnCounter.position.bottomRight = false;
     notifications();
@@ -770,9 +736,5 @@ function tieReset(){
             return
         }
 };
-
-
-
-
 // closing brackets...
 //})()
